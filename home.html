@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenSignal – Smart Alerts for a Cleaner, Plastic-Free Environment</title>
+  <link rel="stylesheet" href="css1.css"/>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("pBQYSks0rbcmiJ5My");
+  })();
+</script>
+
+
+</head>
+<body>
+ <div style="display:flex;align-items:center;justify-content:space-between;">
+  <!-- Left: Logo and Title tightly together -->
+  <div style="display:flex;align-items:center;gap:6px;">
+    <img src="signal.png" alt="leaf logo" style="height:40px;margin-right:2px;">
+    <span class="brand-unique">
+      <span class="brand-green">Green</span><span class="brand-dark">Signal</span>
+    </span>
+  </div>
+  <!-- Right: Navigation Buttons -->
+  <div style="display:flex;align-items:center;gap:18px;">
+    <button type="button" class="nav-btn" data-page="home">Home</button>
+    <button type="button" class="nav-btn" data-page="report">Report</button>
+    <button type="button" class="nav-btn" data-page="collect">Collect</button>
+    <button type="button" class="nav-btn" data-page="register">Register</button>
+    <button type="button" class="nav-btn" data-page="about">About</button>
+  </div>
+</div>
+
+   <main>
+    <!-- Home -->
+    <section id="home" class="page" style="display:block">
+      <div class="page-body home-main">
+        <div class="hero-icon">
+         <img src="signal.png" alt="leaf logo" class="leaf-img"/>
+        </div>
+        <h1 class="main-title">Together We Can Make <br><span class="highlight">Earth Plastic-Free</span></h1>
+        <div class="subtitle">Smart alerts for a cleaner environment. Report plastic waste and connect with nearby collectors instantly.</div>
+        <div class="main-btns">
+         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<button class="btn solid" onclick="showPage('report')">
+  <span class="material-icons" style="vertical-align:middle;">assignment</span> Report Waste
+</button>
+<button class="btn solid" onclick="showPage('collect')">
+  <span class="material-icons" style="vertical-align:middle;">delete_forever</span> Collect Waste
+</button>
+
+
+</div>
+<h2 class="section-head">How It Works</h2>
+<div class="how-steps-row">
+  <div class="how-step">
+    <div class="icon-wrap"><span class="material-icons how-icon">my_location</span></div>
+    <div class="step-title">Detect Location</div>
+    <div class="step-desc">The system automatically locates you when you report.</div>
+  </div>
+  <div class="how-step">
+    <div class="icon-wrap"><span class="material-icons how-icon">assignment</span></div>
+    <div class="step-title">Submit Report</div>
+    <div class="step-desc">Upload photo & info, press submit. Easy.</div>
+  </div>
+  <div class="how-step">
+    <div class="icon-wrap"><span class="material-icons how-icon">email</span></div>
+    <div class="step-title">Collector Notified</div>
+    <div class="step-desc">All collectors in your city get instant email alerts.</div>
+  </div>
+  <div class="how-step">
+    <div class="icon-wrap"><span class="material-icons how-icon">check_circle</span></div>
+    <div class="step-title">Waste Collected</div>
+    <div class="step-desc">Once cleaned, status updates to “Collected”.</div>
+  </div>
+</div>
+
+        <section class="cta-footer">
+          <div class="cta-row">
+            <h3>Ready to Make a Difference?</h3>
+            <div class="cta-sub">Join our community of environmental heroes making cities plastic-free, one report at a time.</div>
+            <button class="btn solid" onclick="showPage('register')">Register as Collector</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Report -->
+    <section id="report" class="page">
+      <div class="page-body">
+        <div class="icon-head"><span class="icon-green">📝</span></div>
+        <h2 class="section-head">Report Plastic Waste</h2>
+        <div class="subtitle">Help make your community cleaner by reporting plastic waste.</div>
+        <form id="reportForm" class="main-form">
+          <label>Full Name</label>
+          <input type="text" id="name" class="input-wide" placeholder="Enter your full name" required>
+          <select id="city" class="input-wide" required>
+            <option value="">Select city</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
+            <option value="Jaipur">Jaipur</option>
+          </select>
+          <label>Short Description</label>
+          <input type="text" id="desc" class="input-wide" placeholder="E.g. Plastic bottles near the park entrance." required>
+          <label>Location</label>
+          <div class="flex-row">
+            <input type="text" id="location" class="input-wide" placeholder="Detect location automatically" readonly required>
+            <button class="btn solid small" type="button" onclick="detectLocation()">📍 Detect My Location</button>
+          </div>
+          <label>Upload Photo (optional)</label>
+          <div class="photo-upload-box">
+            <input type="file" id="photo" accept="image/*" class="input-wide">
+            <div class="upload-msg">Click to upload photo</div>
+          </div>
+          <button class="btn solid" type="submit">Submit Report</button>
+        </form>
+        <div id="msg" class="success-msg"></div>
+      </div>
+    </section>
+
+    <!-- Report after submit -->
+    <section id="reportSuccess" class="page">
+      <div class="page-body">
+        <div class="centered-card">
+          <div class="icon-green big">✔</div>
+          <div class="success-title">Thank You!</div>
+          <div class="success-desc">Your waste report has been submitted successfully.<br>Nearby collectors will be notified via email.</div>
+          <button class="btn solid" onclick="resetReportForm()">Submit Another Report</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collect -->
+    <section id="collect" class="page">
+      <div class="page-body">
+        <div class="icon-head"><span class="icon-orange">🗑</span></div>
+        <h2 class="section-head">Waste Collection Dashboard</h2>
+        <div class="subtitle">View and manage waste reports in your area</div>
+        <div class="city-filter">
+          <label for="collectCity">🧭 Filter by City</label>
+          <select id="collectCity" class="input-wide" onchange="showReports()">
+            <option value="">Select city</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
+            <option value="Jaipur">Jaipur</option>
+          </select>
+        </div>
+        <div id="reportTable"></div>
+      </div>
+    </section>
+
+    <!-- Register -->
+    <section id="register" class="page">
+      <div class="page-body">
+        <div class="icon-head"><span class="icon-blue">🙋</span></div>
+        <h2 class="section-head">Register as a Collector</h2>
+        <div class="subtitle">Join our network of eco-conscious heroes and help clean your city 🏙</div>
+        <form id="collectorForm" class="main-form">
+          <label>Collector Name</label>
+          <input type="text" id="cname" class="input-wide" placeholder="Enter your name" required>
+          <label>Email Address</label>
+          <input type="email" id="cemail" class="input-wide" placeholder="your@email.com" required>
+          <label>City</label>
+          <select id="ccity" class="input-wide" required>
+            <option value="">Select your city</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Pune">Pune</option>
+            <option value="Jaipur">Jaipur</option>
+          </select>
+          <label>Contact Number</label>
+          <input type="text" id="ccontact" class="input-wide" placeholder="99999 88888" required>
+          <button class="btn solid" type="submit">Register as Collector</button>
+        </form>
+        <div id="msgCollector" class="success-msg"></div>
+        <div class="note-box">Note: Once registered, you’ll receive instant collection requests on your email whenever a report is made in your selected city. Make sure your email and contact number are valid for updates and status reminders.</div>
+      </div>
+    </section>
+    <!-- Collector registration success -->
+    <section id="registerSuccess" class="page">
+      <div class="page-body">
+        <div class="centered-card">
+          <div class="icon-green big">✔</div>
+          <div class="success-title">Registration Successful!</div>
+          <div class="success-desc">Thank you for registering as a waste collector. You will receive email alerts when new reports are logged in your selected city.</div>
+          <button class="btn solid" onclick="resetCollectorForm()">Register Another Collector</button>
+        </div>
+      </div>
+    </section>
+
+   <!-- About -->
+<section id="about" class="page">
+  <div class="about-hero">
+    <div class="about-icon">
+      <img src="signal.png" alt="leaf logo" class="leaf-img"/>
+    </div>
+    <h2>About <span class="brand-unique">GreenSignal</span></h2>
+    <span class="desc">Smart Alerts for a Cleaner, Plastic-Free Environment</span>
+  </div>
+  <div class="about-main-wrap">
+    <div class="about-card">
+      <div class="card-icon green"><span>🌱</span></div>
+      <div>
+        <div class="card-title">Project Idea</div>
+        <div class="card-desc">GreenSignal is designed to empower citizens to take part in environmental protection by reporting plastic waste in their locality. Each report is automatically shared with collectors nearby for quick action.</div>
+      </div>
+    </div>
+    <div class="about-card">
+      <div class="card-icon blue"><span>🔷</span></div>
+      <div>
+        <div class="card-title">Sustainability Goal</div>
+        <div class="card-desc">Our goal is to create a cleaner, plastic-free environment by connecting people and communities through technology — encouraging civic participation and eco-awareness.</div>
+      </div>
+    </div>
+    <div class="about-card">
+      <div class="card-icon purple"><span>🟣</span></div>
+      <div>
+        <div class="card-title">Impact Vision</div>
+        <div class="card-desc">Through community collaboration, we aim to reduce unattended plastic waste, promote recycling, and encourage responsible disposal habits.</div>
+      </div>
+    </div>
+    <div class="about-section-block how-block">
+      <div class="block-title"><span>🧑‍🤝‍🧑</span> How We Work</div>
+      <div class="about-how-boxes">
+        <div class="about-how">
+          <div class="how-label-head">For Citizens</div>
+          <span>Quickly report waste with just a tap. Our system pings nearby collectors for instant support, keeping your city plastic free and cleaner for all.</span>
+        </div>
+        <div class="about-how">
+          <div class="how-label-head">For Collectors</div>
+          <span>Register and receive real-time waste alerts matched to your city. View photo & location, act and mark as collected from your dashboard.</span>
+        </div>
+      </div>
+    </div>
+    <div class="chips-row">
+      <div class="chip">
+        <div class="chip-icon blue">🟦</div>
+        <div class="chip-label">Cleaner Cities</div>
+        <div class="chip-desc">Reducing plastic pollution</div>
+      </div>
+      <div class="chip">
+        <div class="chip-icon yellow">🟨</div>
+        <div class="chip-label">Community Driven</div>
+        <div class="chip-desc">People helping people</div>
+      </div>
+      <div class="chip">
+        <div class="chip-icon green2">🟩</div>
+        <div class="chip-label">Instant Action</div>
+        <div class="chip-desc">Faster, live results</div>
+      </div>
+    </div>
+    <div class="about-footer-cta">
+      <div>
+        <div class="about-footer-call">Ready to Join the Movement?</div>
+        <div class="about-footer-desc">Whether you want to report waste or collect it, GreenSignal makes it easy to contribute to a cleaner community.</div>
+      </div>
+    </div>
+    <div class="extra-footer">Making cities cleaner, one click at a time.</div>
+  </div>
+</section>
+  </main>
+<!-- Firebase v8 Compat SDKs (No modules needed) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBt4DJf4oXV5zES-UF6UTs9kyH3mYgvsNc",
+    authDomain: "greensignal-data.firebaseapp.com",
+    databaseURL: "https://greensignal-data-default-rtdb.firebaseio.com",
+    projectId: "greensignal-data",
+    storageBucket: "greensignal-data.appspot.com",
+    messagingSenderId: "989421505339",
+    appId: "1:989421505339:web:6a10056dc046aa8156051e",
+    measurementId: "G-K0WL7CGGZC"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  console.log("Firebase loaded:", db);
+</script>
+<script src="script.js"></script>
+
+</body>
+</html>
